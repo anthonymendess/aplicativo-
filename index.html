@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronometro - javascript</title>
+    <style>
+
+        *{
+            border: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "poppins", sans-serif;
+        }
+        body{
+            background: linear-gradient(#647a75, #092b5a);
+            overflow: hidden;
+            height: 700px;
+            width: 100%;
+        }
+        .container{
+            text-align: center;
+        }
+        button{
+            background: #069;
+            color: white;
+            font-size: 32px;
+            padding: 8px 20px;
+            cursor: pointer;
+            border: 0;
+        }
+        button:hover{
+            background-color: lightgray;
+        }
+
+            
+            
+        
+    </style>
+</head>
+<body>
+    <audio id="sound" src="./Musica de  vingadores guerra  infinita.mp3" style="display: none ;"></audio> 
+    
+    <div class="container">
+        <h2>Minutos</h2>
+        <select id="minutos" name="minutos"></select>
+
+        <h2>Segundos</h2>
+        <select id="segundos" name="segundos"></select> 
+        <br/>
+        <br/>
+        <button id="comecar">Começar</button>
+            <div id="display">
+                <h3></h3>
+            </div>
+        
+    </div>
+    <script>
+        var display =document.getElementById('display');
+
+        var minutos = document.getElementById('minutos');
+        var segundos = document.getElementById('segundos');
+
+        var comecar =document.getElementById('comecar');
+
+        var Cronometroseg;
+
+        var minutoatual;
+        var segundosatual;
+
+        var interval;
+
+        for(var i = 0; i <= 60; i++){
+            minutos.innerHTML+='<option value="'+i+'">'+i+'</option';
+        }
+        for(var i = 1; i <= 60; i++){
+            segundos.innerHTML+='<option value="'+i+'">'+i+'</option>'
+        }
+       comecar.addEventListener('click',function(){
+        minutoatual = minutos.value;
+        segundosatual = segundos.value;
+
+        display.childNodes[1].innerHTML = minutoatual + ":"+segundosatual;
+
+        interval = setInterval(function(){
+            segundosatual--;
+            if(segundosatual <= 0){
+            if(minutoatual > 0){
+                minutoatual--;
+                segundosatual = 59;
+              }else{
+        
+                document.getElementById("sound").play();
+                clearInterval(interval);
+               
+            }
+            
+        }
+        
+        display.childNodes[1].innerHTML = minutoatual + ":"+segundosatual;
+            },1000);
+      
+      
+        })
+
+
+    </script>
+</body>
+</html>
